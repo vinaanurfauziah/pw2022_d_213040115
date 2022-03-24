@@ -17,7 +17,7 @@ $mahasiswa = [
     ],
     [
         "nama"=>"Yudha Yudhistira",  
-        "email"=>"yudhayudhistira@gmail.com", 
+        "email"=>"yudhistirayudha09@gmail.com", 
         "npm"=>"213040124",
         "jurusan"=>"Teknik Informatika",
         "gambar"=>"yudha.png"
