@@ -48,7 +48,7 @@ if( isset($_POST["register"]) ) {
                                                 <label class="small mb-1" for="password2">Konfirmasi Password</label>
                                                 <input class="form-control py-4" id="password2" name="password2" type="password" placeholder="Masukkan password" />
                                             </div>
-                                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login.php" name="register">Register!</a></div>
+                                            <div class="form-group mt-4 mb-0"><input type="submit" name="register" value="Registrasi" class="btn-danger"></input>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">

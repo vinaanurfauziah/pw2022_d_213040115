@@ -12,14 +12,14 @@ if(isset($_POST['login'])){
     $hitung = mysqli_num_rows($cekdatabase);
 
     if($hitung>0){
-        $_SESSION['log'] = 'True';
+        $_SESSION['login'] = 'True';
         header('location:index.php');
     } else {
         header('location:login.php');
     };
 };
 
-if(!isset($_SESSION['log'])){
+if(!isset($_SESSION['login'])){
 
 } else {
     header('location:index.php');
@@ -59,7 +59,7 @@ if(!isset($_SESSION['log'])){
                                                 <input class="form-control py-4" name="password" id="inputPassword" type="password" placeholder="Masukkan password" />
                                             </div>
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button class="btn btn-primary" name="login">Login</button>
+                                                <input type="submit" name="login" value="Login">
                                             </div>
                                         </form>
                                     </div>
