@@ -64,7 +64,7 @@ if(!isset($_SESSION['login'])){
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <div class="small"><a href="registrasi.php">Belum punya akunnnnn? Daftar disini!</a></div>
+                                        <div class="small"><a href="registrasi.php">Belum punya akun? Daftar disini!</a></div>
                                     </div>
                                     
                                 </div>
