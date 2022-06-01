@@ -1,82 +1,85 @@
 <?php 
-require 'function.php';
+session_start();
+require 'functions.php';
 
-// cek login, terdaftar atau engga
-if(isset($_POST['login'])){
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+// cek cookie
+if(isset($_COOKIE['id']) && isset($_COOKIE['key']) ) {
+    $id = $_COOKIE['id'];
+    $key = $_COOKIE['key'];
 
-    // cocokin dengan database, cari.. ada atau engga tuh data
-    $cekdatabase = mysqli_query($conn, "SELECT * FROM login where email='$email' and password='$password'");
-    // hitung jumlah data
-    $hitung = mysqli_num_rows($cekdatabase);
+    // ambil username berdasarkan id
+    $result = mysqli_query($conn, "SELECT username FROM user WHERE id=$id");
+    $row = mysqli_fetch_assoc($result);
 
-    if($hitung>0){
-        $_SESSION['login'] = 'True';
-        header('location:index.php');
-    } else {
-        header('location:login.php');
-    };
-};
-
-if(!isset($_SESSION['login'])){
-
-} else {
-    header('location:index.php');
+    // cek cookie dan username
+    if( $key === hash('sha256', $row['username']) ) {
+        $_SESSION['login'] = true;
+    }
 }
+
+if( isset($_SESSION["login"]) ) {
+    header("Location: index.php");
+    exit;
+}
+
+
+
+if(isset($_POST["login"]) ) {
+
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+
+    // cek username 
+    if( mysqli_num_rows($result) === 1 ){
+
+        // cek password
+        $row = mysqli_fetch_assoc($result);
+        if( password_verify($password, $row["password"]) ) {
+        //    set session
+        $_SESSION["login"] = true;
+
+        // cek remember me
+        if(isset($_POST['remember']) ) {
+            // buat cookie
+            setcookie('id', $row['id'], time()+60); 
+            setcookie('key', hash('sha256', $row['username'])); 
+        }
+
+        header("Location: index.php");
+        exit;
+       }
+    }
+
+    $error = true;
+
+}
+
 ?>
 
-
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Login</title>
-        <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="bg-primary">
-        <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
-                <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
-                                    <div class="card-body">
-                                        <form method="post">
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control py-4" name="email" id="inputEmailAddress" type="email" placeholder="Masukkan alamat email" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="inputPassword">Password</label>
-                                                <input class="form-control py-4" name="password" id="inputPassword" type="password" placeholder="Masukkan password" />
-                                            </div>
-                                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <input type="submit" name="login" value="Login">
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-footer text-center">
-                                        <div class="small"><a href="registrasi.php">Belum punya akun? Daftar disini!</a></div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-            
-        </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-    </body>
+<html>
+<head>
+    <title>Halaman Login</title>
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+
+<?php if( isset($error)) : ?>
+    <p style="color: red; font-style: italic;">username / password salah</p>
+<?php endif; ?>
+
+<form action="" method="post" class="box">
+            <h1>Login</h1>
+            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="password" name="password" id="password" placeholder="Password">
+            <input type="submit" name="login" value="Login"></input>
+            <a href="registrasi.php">Belum punya akun? Daftar disini!</a>
+       
+
+</form>
+
+</body>
+<script src="js/bootstrap.bundle.min.js"></script>
 </html>
