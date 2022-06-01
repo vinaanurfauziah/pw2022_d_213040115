@@ -38,7 +38,7 @@ if( isset($_POST["cari"]) ) {
 
 <nav class="navbar bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand">Daftar Stok Barang</a>
+    <a class="navbar-brand">Techne</a>
     <form class="d-flex" role="search">
       <input type="text" name="keyword" class="form-control me-2" type="search" autofocus placeholder="Search" aria-label="Search" autocomplete="off" id="keyword">
       <button class="btn btn-outline-success" type="submit" name="cari" id="tombol-cari">Search</button>

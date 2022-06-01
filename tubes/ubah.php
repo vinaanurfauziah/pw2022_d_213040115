@@ -44,6 +44,15 @@ if( isset($_POST["submit"]) ){
     <title>Ubah data stok</title>
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+            .zoomable{
+                width: 100px;
+            }
+            .zoomable:hover{
+                transform: scale(2.5);
+                transition: 0.3s ease;
+            }
+    </style>
 </head>
 <body>
 
@@ -78,14 +87,14 @@ if( isset($_POST["submit"]) ){
                 <div class="mb-3 row">
                     <label for="stok" class="col-sm-2 col-form-label">Gambar</label>
                     <div class="col-sm-5">
-                    <img src="img/<?= $stk['gambar']; ?>" width="100"><br>
+                    <img src="img/<?= $stk['gambar']; ?>" width="100" class="zoomable"><br>
                     <input type="file" class="form-control" name="gambar" id="gambar">
                     </div>
                 </div>
             
                 
                 <div class="card-footer text-muted">
-                <button type="submit" name="submit" class="btn btn-info">Simpan!</button>
+                <button type="submit" name="submit" class="btn btn-info">Ubah!</button>
                 </div>
             </div>
         </div>
