@@ -74,7 +74,7 @@ if( isset($_POST["submit"]) ){
            
             
             <div class="card-footer text-muted">
-            <button type="submit" name="submit" class="btn btn-info">Tambah!</button>
+            <button type="submit" name="submit" class="btn btn-info">Simpan!</button>
             </div>
         </div>
     </div>
