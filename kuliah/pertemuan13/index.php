@@ -46,6 +46,7 @@ if(isset($_GET["cari"])) {
     </div>
   </form>
 
+    
     <table class="table">
   <thead>
     <tr>
