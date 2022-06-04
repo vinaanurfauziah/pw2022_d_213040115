@@ -132,7 +132,7 @@ function registrasi($data) {
     $username = strtolower(stripslashes($data["username"]));
     $password = mysqli_real_escape_string($conn, $data["password"]);
     $password2 =  mysqli_real_escape_string($conn, $data["password2"]);
-    // $role = mysqli_real_escape_string($conn, $data["role"]);
+    $role = mysqli_real_escape_string($conn, $data["role"]);
 
     // cek username sudah ada atau belum
     $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
@@ -156,41 +156,41 @@ function registrasi($data) {
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     // tambahkan userbaru ke database
-    mysqli_query($conn, "INSERT INTO user VALUES('','$username','$password')");
+    mysqli_query($conn, "INSERT INTO user VALUES('','$username','$password','$role')");
 
     return mysqli_affected_rows($conn);
 }
 
-// if(isset($_POST['login'])){
-//     $username = $_POST['username'];
-//     $password = $_POST['password'];
+if(isset($_POST['login'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-//     $cekuser = mysqli_query($conn, "SELECT * FROM user WHERE username='$username' and password='$password'");
-//     $hitung = mysqli_num_rows($cekuser);
+    $cekuser = mysqli_query($conn, "SELECT * FROM user WHERE username='$username' and password='$password'");
+    $hitung = mysqli_num_rows($cekuser);
 
-//     if($hitung>0){
-//         // kalau data ditemukan
-//         $ambildatarole = mysqli_fetch_array($cekuser);
-//         $role = $ambildatarole['role'];
+    if($hitung>0){
+        // kalau data ditemukan
+        $ambildatarole = mysqli_fetch_array($cekuser);
+        $role = $ambildatarole['role'];
 
-//         if($role=='admin'){
-//             // kalau dia admin
-//             $_SESSION['log'] = 'Logged';
-//             $_SESSION['role'] = 'Admin';
-//             header('location:admin');
-//         } else {
-//             // kalau bukan admin
-//             $_SESSION['log'] = 'Logged';
-//             $_SESSION['role'] = 'User';
-//             header('location:user');
-//         }
+        if($role=='admin'){
+            // kalau dia admin
+            $_SESSION['log'] = 'Logged';
+            $_SESSION['role'] = 'Admin';
+            header('location:admin');
+        } else {
+            // kalau bukan admin
+            $_SESSION['log'] = 'Logged';
+            $_SESSION['role'] = 'User';
+            header('location:user');
+        }
 
-//     } else {
-//         // kalau tidak ditemukan
+    } else {
+        // kalau tidak ditemukan
 
-//         echo 'Data tidak ditemukan';
-//     }
-// };
+        echo 'Data tidak ditemukan';
+    }
+};
 
 // if(isset($_POST['submit'])){
 //     $nama = $_POST['nama'];

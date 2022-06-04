@@ -47,8 +47,15 @@ if(isset($_POST["login"]) ) {
             setcookie('key', hash('sha256', $row['username'])); 
         }
 
-        header("Location: index.php");
-        exit;
+        // cek dia user atau admin
+        if($row["role"] === 'admin') {
+            header("Location: index.php");
+            exit;
+        } else if($row["role"] === "user") {
+            header("Location: user/index.php");
+            exit;
+        }
+
        }
     }
 
