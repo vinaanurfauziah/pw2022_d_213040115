@@ -53,9 +53,27 @@ if( isset($_POST["submit"]) ){
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
+                <label for="nama" class="col-sm-2 col-form-label">Sistem Operasi</label>
                 <div class="col-sm-5">
-                <textarea class="form-control" name="deskripsi" id="deskripsi" rows="4"></textarea>
+                    <input type="text" class="form-control" name="sistemoperasi" id="sistemoperasi">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="nama" class="col-sm-2 col-form-label">Processor</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="processor" id="processor">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="nama" class="col-sm-2 col-form-label">Warna</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="warna" id="warna">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="nama" class="col-sm-2 col-form-label">Harga</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="harga" id="harga">
                 </div>
             </div>
             <div class="mb-3 row">

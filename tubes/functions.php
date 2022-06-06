@@ -16,7 +16,10 @@ function tambah($data) {
     global $conn;
 
     $nama = htmlspecialchars($data["nama"]);
-    $deskripsi = htmlspecialchars($data["deskripsi"]);
+    $sistemoperasi = htmlspecialchars($data["sistemoperasi"]);
+    $processor = htmlspecialchars($data["processor"]);
+    $warna = htmlspecialchars($data["warna"]);
+    $harga = htmlspecialchars($data["harga"]);
     $stok = htmlspecialchars($data["stok"]);
 
     // upload gambar
@@ -27,7 +30,7 @@ function tambah($data) {
 
     $query = "INSERT INTO stok 
                 VALUES 
-                ('', '$nama', '$deskripsi', '$stok', '$gambar')
+                ('', '$nama', '$sistemoperasi', '$processor', '$warna', '$harga', '$stok', '$gambar')
                 ";
     mysqli_query($conn, $query);
 
@@ -92,7 +95,10 @@ function ubah($data) {
 
     $id = $data["id"];
     $nama = htmlspecialchars($data["nama"]);
-    $deskripsi = htmlspecialchars($data["deskripsi"]);
+    $sistemoperasi = htmlspecialchars($data["sistemoperasi"]);
+    $processor = htmlspecialchars($data["processor"]);
+    $warna = htmlspecialchars($data["warna"]);
+    $harga = htmlspecialchars($data["harga"]);
     $stok = htmlspecialchars($data["stok"]);
     $gambarLama = htmlspecialchars($data["gambarLama"]);
 
@@ -105,7 +111,10 @@ function ubah($data) {
 
     $query = "UPDATE stok SET
                 nama = '$nama',
-                deskripsi = '$deskripsi',
+                sistemoperasi = '$sistemoperasi',
+                processor = '$processor',
+                warna = '$warna',
+                harga = '$harga',
                 stok = '$stok',
                 gambar = '$gambar'
             WHERE id = $id
@@ -120,7 +129,10 @@ function cari($keyword) {
     $query = "SELECT * FROM stok
                 WHERE
             nama LIKE '%$keyword%' OR
-            deskripsi LIKE '%$keyword%' OR
+            sistemoperasi LIKE '%$keyword%' OR
+            processor LIKE '%$keyword%' OR
+            warna LIKE '%$keyword%' OR
+            harga LIKE '%$keyword%' OR
             stok LIKE '%$keyword%'
         ";
     return query($query);

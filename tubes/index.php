@@ -1,23 +1,30 @@
 <?php 
-require '../functions.php';
-$stok = query("SELECT * FROM stok");
+session_start();
 
+// if( !isset($_SESSION["login"]) ) {
+//     header("Location: login.php");
+//     exit;
+// }
+
+require 'functions.php';
+$stok = query("SELECT * FROM stok");
 
 // tombol cari ditekan
 if( isset($_POST["cari"]) ) {
-    
     $stok = cari($_POST["keyword"]);
 }
+
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Halaman User</title>
+    <title>Halaman Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="../css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/script2.js"></script>
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
     <style>
             .zoomable{
                 width: 100px;
@@ -30,17 +37,17 @@ if( isset($_POST["cari"]) ) {
 </head>
 <body>
 
-    <nav class="navbar bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand">Techne</a>
-        <form class="d-flex" role="search" action="" method="post">
-        <input type="text" name="keyword" class="form-control me-2" type="search" autofocus placeholder="Search" aria-label="Search" autocomplete="off" id="keyword">
-        <button class="btn btn-outline-success" type="submit" name="cari" id="tombol-cari">Search</button>
-        </form>
-    </div>
-    </nav>
-    
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+<nav class="navbar bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand">Techne</a>
+    <form class="d-flex" role="search">
+      <input type="text" name="keyword" class="form-control me-2" type="search" autofocus placeholder="Search" aria-label="Search" autocomplete="off" id="keyword">
+      <button class="btn btn-outline-success" type="submit" name="cari" id="tombol-cari">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -48,13 +55,13 @@ if( isset($_POST["cari"]) ) {
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-        <img src="../assets/1.jpg" class="d-block w-100" alt="..." width="80px" height="690px">
+        <img src="assets/1.jpg" class="d-block w-100" alt="..." width="80px" height="690px">
         </div>
         <div class="carousel-item">
-        <img src="../assets/2.jpg" class="d-block w-100" alt="..." width="80px" height="690px">
+        <img src="assets/2.jpg" class="d-block w-100" alt="..." width="80px" height="690px">
         </div>
         <div class="carousel-item">
-        <img src="../assets/3.jpg" class="d-block w-100" alt="..." width="80px" height="690px">
+        <img src="assets/3.jpg" class="d-block w-100" alt="..." width="80px" height="690px">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -72,7 +79,7 @@ if( isset($_POST["cari"]) ) {
     <div class="container">
             <div class="card mt-3">
                 <div class="card-header">
-               <a href="../logout.php" class="btn btn-info">Logout</a>
+                <a href="tambah.php" class="btn btn-primary">Tambah</a>  <a href="logout.php" class="btn btn-info">Logout</a>
                 </div>
                 <div class="card-body">
 
@@ -82,10 +89,11 @@ if( isset($_POST["cari"]) ) {
 
                     <tr>
                         <th>No.</th>
+                        <th>Aksi</th>
                         <th>Gambar</th>
                         <th>Nama Barang</th>
-                        <th>Sistem Operasi</th>
                         <th>Processor</th>
+                        <th>Sistem Operasi</th>
                         <th>Warna</th>
                         <th>Harga</th>
                         <th>Stok</th>
@@ -95,7 +103,12 @@ if( isset($_POST["cari"]) ) {
                     <?php foreach( $stok as $row) : ?>
                     <tr>
                         <td><?= $i; ?></td>
-                        <td><img src="../img/<?= $row["gambar"]; ?>" width="100" class="zoomable"></td>
+                        <td>
+                            <a href="ubah.php?id=<?= $row["id"]; ?>" class="btn btn-warning">ubah</a> 
+                            <br><br>
+                            <a href="hapus.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?');" class="btn btn-danger">hapus</a>
+                        </td>
+                        <td><img src="img/<?= $row["gambar"]; ?>" width="100" class="zoomable"></td>
                         <td><?= $row["nama"]; ?></td>
                         <td><?= $row["sistemoperasi"]; ?></td>
                         <td><?= $row["processor"]; ?></td>
@@ -116,6 +129,6 @@ if( isset($_POST["cari"]) ) {
 
     <br>
 
-<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

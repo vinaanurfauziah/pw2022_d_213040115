@@ -84,7 +84,10 @@ if( isset($_POST["cari"]) ) {
                         <th>Aksi</th>
                         <th>Gambar</th>
                         <th>Nama Barang</th>
-                        <th>Deskripsi</th>
+                        <th>Sistem Operasi</th>
+                        <th>Processor</th>
+                        <th>Warna</th>
+                        <th>Harga</th>
                         <th>Stok</th>
                     </tr>
 
@@ -99,7 +102,10 @@ if( isset($_POST["cari"]) ) {
                         </td>
                         <td><img src="../img/<?= $row["gambar"]; ?>" width="100" class="zoomable"></td>
                         <td><?= $row["nama"]; ?></td>
-                        <td><?= $row["deskripsi"]; ?></td>
+                        <td><?= $row["sistemoperasi"]; ?></td>
+                        <td><?= $row["processor"]; ?></td>
+                        <td><?= $row["warna"]; ?></td>
+                        <td><?= $row["harga"]; ?></td>
                         <td><?= $row["stok"]; ?></td>
                     </tr>
                     <?php $i++; ?>
