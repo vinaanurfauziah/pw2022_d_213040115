@@ -5,7 +5,10 @@ $keyword = $_GET["keyword"];
 $query = "SELECT * FROM stok
             WHERE
             nama LIKE '%$keyword%' OR
-            deskripsi LIKE '%$keyword%' OR
+            sistemoperasi LIKE '%$keyword%' OR
+            processor LIKE '%$keyword%' OR
+            warna LIKE '%$keyword%' OR
+            harga LIKE '%$keyword%' OR
             stok LIKE '%$keyword%'
             ";
 
@@ -19,7 +22,10 @@ $stok = query($query);
         <th>Aksi</th>
         <th>Gambar</th>
         <th>Nama Barang</th>
-        <th>Deskripsi</th>
+        <th>Sistem Operasi</th>
+        <th>Processor</th>
+        <th>Warna</th>
+        <th>Harga</th>
         <th>Stok</th>
     </tr>
 
@@ -33,7 +39,10 @@ $stok = query($query);
         </td>
         <td><img src="img/<?= $row["gambar"]; ?>" width="100"></td>
         <td><?= $row["nama"]; ?></td>
-        <td><?= $row["deskripsi"]; ?></td>
+        <td><?= $row["sistemoperasi"]; ?></td>
+        <td><?= $row["processor"]; ?></td>
+        <td><?= $row["warna"]; ?></td>
+        <td><?= $row["harga"]; ?></td>
         <td><?= $row["stok"]; ?></td>
     </tr>
     <?php $i++; ?>
